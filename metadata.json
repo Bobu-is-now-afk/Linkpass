@@ -1,0 +1,6 @@
+{
+  "name": "LinkPass",
+  "description": "A minimalist, real-time link and text sharing space. Enter a 4-digit code to join a room and sync content instantly across devices.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

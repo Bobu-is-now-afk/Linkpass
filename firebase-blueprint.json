@@ -1,0 +1,48 @@
+{
+  "firestore": {
+    "/rooms/{code}": {
+      "schema": "Room",
+      "description": "Collection of active sharing rooms."
+    },
+    "/rooms/{code}/messages": {
+      "schema": "Message",
+      "description": "Subcollection of messages in a room."
+    }
+  },
+  "entities": {
+    "Room": {
+      "title": "Room",
+      "description": "A real-time sharing room identified by a 4-digit code.",
+      "type": "object",
+      "properties": {
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the room was active."
+        }
+      },
+      "required": ["updatedAt"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A single chat message.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The content of the message."
+        },
+        "senderId": {
+          "type": "string",
+          "description": "The unique ID of the sender."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the message was sent."
+        }
+      },
+      "required": ["text", "senderId", "createdAt"]
+    }
+  }
+}

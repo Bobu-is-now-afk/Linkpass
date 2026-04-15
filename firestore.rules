@@ -1,0 +1,36 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: rooms
+// Document ID: {code} (4-digit string)
+// Fields:
+//   - content: string (required, max 5000 chars)
+//   - updatedAt: timestamp (required)
+//
+// ===============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper Functions
+    function isValidMessage(data) {
+      return data.keys().hasAll(['text', 'senderId', 'createdAt']) &&
+             data.keys().hasOnly(['text', 'senderId', 'createdAt']) &&
+             data.text is string &&
+             data.text.size() <= 5000 &&
+             data.senderId is string &&
+             data.createdAt is timestamp;
+    }
+
+    match /rooms/{code} {
+      allow read: if code.matches("^[0-9]{4}$");
+      allow create, update: if code.matches("^[0-9]{4}$");
+      
+      match /messages/{messageId} {
+        allow read: if code.matches("^[0-9]{4}$");
+        allow create: if code.matches("^[0-9]{4}$") && isValidMessage(request.resource.data);
+      }
+    }
+  }
+}
