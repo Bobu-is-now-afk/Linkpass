@@ -45,17 +45,19 @@ To run this project locally, you will need Node.js and a Supabase project.
 
 2. **Install dependencies:**
 (Note: Use --legacy-peer-deps if you encounter React 19 / Framer Motion version conflicts)
-npm install
+   ```bash
+   npm install
 
 3. **Set up Environment Variables:**
 Create a .env.local file in the root directory and add your Supabase credentials:
 
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```bash
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 4. **Run the development server:**
-npm run dev
-Open http://localhost:3000 with your browser to see the result.
+   ```bashnpm run dev
+   Open http://localhost:3000 with your browser to see the result.
 
 ## 🤝 Philosophy & Contributing
 
