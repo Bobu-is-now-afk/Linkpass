@@ -43,7 +43,6 @@ To run this project locally, you will need Node.js and a Supabase project.
    git clone [https://github.com/Bobu-is-now-afk/Linkpass.git](https://github.com/Bobu-is-now-afk/Linkpass.git)
    cd Linkpass
 
-
 2. **Install dependencies:**
 (Note: Use --legacy-peer-deps if you encounter React 19 / Framer Motion version conflicts)
 npm install
@@ -58,10 +57,12 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 npm run dev
 Open http://localhost:3000 with your browser to see the result.
 
-**🤝 Philosophy & Contributing**
+## 🤝 Philosophy & Contributing
+
 LinkPass was built to solve a genuine, everyday annoyance in academic and professional environments. It is proudly non-profit and open-source.
 
 Feel free to open issues or submit pull requests. Whether it is optimizing the UI, adding file support, or improving the auto-destruct logic, all contributions are welcome!
 
-**📜 License**
+## 📜 License
+
 MIT License - Free to use, modify, and distribute.
