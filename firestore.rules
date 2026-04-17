@@ -14,22 +14,31 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     // Helper Functions
+    function isValidRoom(data) {
+      return data.keys().hasAll(['createdAt', 'lastActivity']) &&
+             data.createdAt is timestamp &&
+             data.lastActivity is timestamp;
+    }
+
     function isValidMessage(data) {
-      return data.keys().hasAll(['text', 'senderId', 'createdAt']) &&
-             data.keys().hasOnly(['text', 'senderId', 'createdAt']) &&
-             data.text is string &&
-             data.text.size() <= 5000 &&
+      return data.keys().hasAll(['senderId', 'createdAt']) &&
+             data.keys().hasOnly(['senderId', 'createdAt', 'text', 'fileUrl', 'fileName', 'fileSize', 'fileType']) &&
+             (!('text' in data) || (data.text is string && data.text.size() <= 5000)) &&
+             (!('fileUrl' in data) || data.fileUrl is string) &&
+             (!('fileName' in data) || data.fileName is string) &&
+             (!('fileSize' in data) || data.fileSize is number) &&
+             (!('fileType' in data) || data.fileType is string) &&
              data.senderId is string &&
              data.createdAt is timestamp;
     }
 
     match /rooms/{code} {
       allow read: if code.matches("^[0-9]{4}$");
-      allow create, update: if code.matches("^[0-9]{4}$");
+      allow create, update, delete: if code.matches("^[0-9]{4}$");
       
       match /messages/{messageId} {
         allow read: if code.matches("^[0-9]{4}$");
-        allow create: if code.matches("^[0-9]{4}$") && isValidMessage(request.resource.data);
+        allow create, delete: if code.matches("^[0-9]{4}$");
       }
     }
   }

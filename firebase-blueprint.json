@@ -15,22 +15,48 @@
       "description": "A real-time sharing room identified by a 4-digit code.",
       "type": "object",
       "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the room was first created."
+        },
+        "lastActivity": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time a message was sent or the room was accessed."
+        },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The last time the room was active."
+          "description": "Legacy field for compatibility."
         }
       },
-      "required": ["updatedAt"]
+      "required": ["createdAt", "lastActivity"]
     },
     "Message": {
       "title": "Message",
-      "description": "A single chat message.",
+      "description": "A single chat message or file attachment.",
       "type": "object",
       "properties": {
         "text": {
           "type": "string",
-          "description": "The content of the message."
+          "description": "The content of the message (optional if file is present)."
+        },
+        "fileUrl": {
+          "type": "string",
+          "description": "The URL of the uploaded file."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The name of the uploaded file."
+        },
+        "fileSize": {
+          "type": "number",
+          "description": "The size of the uploaded file in bytes."
+        },
+        "fileType": {
+          "type": "string",
+          "description": "The MIME type of the uploaded file."
         },
         "senderId": {
           "type": "string",
@@ -42,7 +68,7 @@
           "description": "When the message was sent."
         }
       },
-      "required": ["text", "senderId", "createdAt"]
+      "required": ["senderId", "createdAt"]
     }
   }
 }
